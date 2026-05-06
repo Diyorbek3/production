@@ -41,5 +41,6 @@ jobs:
         key: ${{ secrets.SSHKEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /var/www/your-python-app
+          cd /home/diyor/production
+          chmod +x .scripts/deploy.sh
           ./.scripts/deploy.sh
