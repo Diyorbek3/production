@@ -1,18 +1,21 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Node 24 Test Workflow
 on: [push]
+
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
+  test-node:
+    runs-on: self-hosted  # O'zingizni runneringiz bo'lgani uchun
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v6
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+      - name: Repo-ni yuklash
+        uses: actions/checkout@v4
+
+      - name: Node.js 24-ni o'rnatish
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Versiyani va Env-ni tekshirish
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          node -v
+          echo "Hozirgi muhit: $APP_STATUS"
+        env:
+          APP_STATUS: "Node 24 migration test" # Rasmda aytilgan env set qilish
